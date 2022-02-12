@@ -50,7 +50,7 @@ class AppSelectFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentAppSelectBinding.inflate(inflater, container, false)
-        binding.adBanner.loadAd(Ads.appSelectAd)
+        //binding.adBanner.loadAd(Ads.appSelectAd)
         binding.refreshLayout.setOnRefreshListener { refresh() }.autoRefresh()
         return binding.root
     }

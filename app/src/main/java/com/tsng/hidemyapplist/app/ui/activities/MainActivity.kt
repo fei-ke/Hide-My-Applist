@@ -12,8 +12,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.preference.PreferenceManager
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+//import com.google.android.gms.ads.AdRequest
+//import com.google.android.gms.ads.MobileAds
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.tsng.hidemyapplist.BuildConfig
 import com.tsng.hidemyapplist.Magic
@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         setContentView(binding.root)
         setSupportActionBar(findViewById(R.id.toolbar))
-        MobileAds.initialize(appContext)
-        binding.adBanner.loadAd(AdRequest.Builder().build())
+        //MobileAds.initialize(appContext)
+        //binding.adBanner.loadAd(AdRequest.Builder().build())
         makeUpdateAlert()
     }
 

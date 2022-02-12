@@ -22,7 +22,7 @@ properties.load(project.rootProject.file("local.properties").inputStream())
 
 plugins {
     id("com.android.application")
-    id("com.google.gms.google-services")
+    //id("com.google.gms.google-services")
     kotlin("android")
 }
 
@@ -144,8 +144,8 @@ dependencies {
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("androidx.work:work-runtime-ktx:2.7.1")
-    implementation("com.google.android.gms:play-services-ads:20.5.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:20.0.2")
+    //implementation("com.google.android.gms:play-services-ads:20.5.0")
+    //implementation("com.google.firebase:firebase-analytics-ktx:20.0.2")
 
     compileOnly("de.robv.android.xposed:api:82")
     compileOnly("de.robv.android.xposed:api:82:sources")
