@@ -193,9 +193,22 @@ class AppSettingsFragment : PreferenceFragmentCompat() {
 
     private fun save() {
         JsonConfigManager.edit {
-            if ((preferenceManager.preferenceDataStore as AppConfigDataStorage).isEnabled)
+            if ((preferenceManager.preferenceDataStore as AppConfigDataStorage).isEnabled) {
+                val originAppList = scope[packageName]?.extraAppList ?: emptySet()
+                val removed = originAppList - appConfig.extraAppList
+                removed.forEach { configOpposite(it, false) }
+                appConfig.extraAppList.forEach { configOpposite(it, true) }
                 scope[packageName] = appConfig
-            else scope.remove(packageName)
+            } else scope.remove(packageName)
+        }
+    }
+
+    private fun JsonConfig.configOpposite(oppositePackage: String, positive: Boolean) {
+        val oppositeConfig = scope[oppositePackage] ?: return
+        if ((oppositeConfig.useWhitelist == appConfig.useWhitelist) xor positive) {
+            oppositeConfig.extraAppList -= packageName
+        } else {
+            oppositeConfig.extraAppList += packageName
         }
     }
 }
