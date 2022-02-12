@@ -68,7 +68,7 @@ class AppSelectAdapter(
         if (!hasCheckBox && selectedApps.contains(appInfo.packageName))
             holder.appNameTextView.setTextColor(appContext.resources.getColor(android.R.color.holo_green_light))
         else
-            holder.appNameTextView.setTextColor(appContext.resources.getColor(android.R.color.black))
+            holder.appNameTextView.setTextColor(appContext.resources.getColor(android.R.color.darker_gray))
         if (appInfo.isSystemApp) {
             holder.summaryTextView.visibility = View.VISIBLE
             holder.summaryTextView.setText(R.string.system_app)
