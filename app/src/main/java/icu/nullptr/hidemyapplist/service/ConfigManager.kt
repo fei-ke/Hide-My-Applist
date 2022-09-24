@@ -128,11 +128,34 @@ object ConfigManager {
 
     fun getAppConfig(packageName: String): JsonConfig.AppConfig? {
         return config.scope[packageName]
+            ?.copy()
     }
 
     fun setAppConfig(packageName: String, appConfig: JsonConfig.AppConfig?) {
+        processConfig(packageName, appConfig)
         if (appConfig == null) config.scope.remove(packageName)
         else config.scope[packageName] = appConfig
         saveConfig()
+    }
+
+    private fun processConfig(packageName: String, appConfig: JsonConfig.AppConfig?) {
+        if (appConfig != null) {
+            val originAppList = getAppConfig(packageName)?.extraAppList ?: emptySet()
+            val removed = originAppList - appConfig.extraAppList
+            removed.forEach { processOpposite(packageName, appConfig, it, false) }
+            appConfig.extraAppList.forEach { processOpposite(packageName, appConfig, it, true) }
+        }
+    }
+
+    private fun processOpposite(packageName: String, appConfig: JsonConfig.AppConfig, oppositePackage: String, positive: Boolean) {
+        val oppositeConfig = getAppConfig(oppositePackage) ?: return
+
+        if ((oppositeConfig.useWhitelist == appConfig.useWhitelist) xor positive) {
+            oppositeConfig.extraAppList -= packageName
+        } else {
+            oppositeConfig.extraAppList += packageName
+        }
+
+        config.scope[oppositePackage] = oppositeConfig
     }
 }
