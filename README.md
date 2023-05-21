@@ -1,3 +1,7 @@
+# 修改版
+- 额外可见/不可见应用时自动双向设置，比如白名单时，对微信设置支付宝可见，支付宝也自动对微信可见
+- 支持安装应用时弹出通知快速设置
+
 # Hide My Applist
 
 [![Stars](https://img.shields.io/github/stars/Dr-TSNG/Hide-My-Applist?label=Stars)](https://github.com/Dr-TSNG)
