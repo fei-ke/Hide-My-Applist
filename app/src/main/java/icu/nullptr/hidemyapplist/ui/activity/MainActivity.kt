@@ -1,8 +1,11 @@
 package icu.nullptr.hidemyapplist.ui.activity
 
+import android.app.Activity
 import android.content.res.Resources
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
@@ -26,6 +29,8 @@ class MainActivity : MaterialActivity() {
         setupWithNavController(binding.bottomNav, navController)
 
         MobileAds.initialize(this)
+
+        requestNotificationPermission(this)
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -44,5 +49,13 @@ class MainActivity : MaterialActivity() {
         super.onApplyTranslucentSystemBars()
         window.statusBarColor = Color.TRANSPARENT
         window.navigationBarColor = Color.TRANSPARENT
+    }
+
+    private fun requestNotificationPermission(activity: Activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+            && ContextCompat.checkSelfPermission(activity, android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED
+        ) {
+            activity.requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 0)
+        }
     }
 }
