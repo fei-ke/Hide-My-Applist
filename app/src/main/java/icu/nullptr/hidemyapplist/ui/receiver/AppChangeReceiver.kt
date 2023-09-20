@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.navigation.NavDeepLinkBuilder
 import com.tsng.hidemyapplist.R
+import icu.nullptr.hidemyapplist.service.ConfigManager
 import icu.nullptr.hidemyapplist.ui.activity.MainActivity
 import icu.nullptr.hidemyapplist.ui.fragment.AppSettingsFragmentArgs
 import icu.nullptr.hidemyapplist.util.PackageHelper
@@ -43,6 +44,7 @@ class AppChangeReceiver : BroadcastReceiver() {
         }
         if (intent.action == Intent.ACTION_PACKAGE_ADDED) {
             val packageName = intent.data?.schemeSpecificPart ?: return
+            if (ConfigManager.getAppConfig(packageName) != null) return
             showNotificationForInstalledApp(context, packageName)
         }
     }
